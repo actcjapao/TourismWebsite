@@ -1,0 +1,95 @@
+
+.text-orange {
+    color: var(--bs-orange);
+}
+
+.bg-orange {
+    background-color: var(--bs-orange);
+}
+
+/* custom btn-orange */
+.btn-orange {
+    color: #fff;
+    background-color: var(--bs-orange);
+    border-color: var(--bs-orange);
+}
+
+.btn-orange:hover {
+    color: #fff;
+    background-color: #e36c0a; /* Slightly darker shade on hover */
+    border-color: #d86209;
+}
+
+.btn-orange:focus, .btn-orange.focus {
+    box-shadow: 0 0 0 0.25rem rgba(253, 126, 20, 0.5); /* Orange focus ring */
+}
+
+.btn-orange:active, .btn-orange.active {
+    color: #fff;
+    background-color: #d86209;
+    border-color: #c45707;
+}
+
+/* custom btn-outline-orange */
+.btn-orange-outline {
+    color: #fd7e14;
+    border: 1px solid #fd7e14;
+    background-color: transparent;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-orange-outline:hover {
+    color: #fff;
+    background-color: #fd7e14;
+    border-color: #fd7e14;
+}
+
+.btn-orange-outline:focus,
+.btn-orange-outline.focus {
+    box-shadow: 0 0 0 0.25rem rgba(253, 126, 20, 0.5); /* Orange focus ring */
+}
+
+.btn-orange-outline:active,
+.btn-orange-outline.active,
+.show > .btn-orange-outline.dropdown-toggle {
+    color: #fff;
+    background-color: #e36c0a;
+    border-color: #d86209;
+}
+
+/* navbar and info bar custom classes */
+/* Offset the navbar correctly below the info bar */
+#mainNavbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1030; /* Should be below top info bar */
+  top: 29px; /* Adjust this depending on actual info bar height */
+}
+
+/* Adjust for expanded mobile info bar if needed */
+@media (max-width: 767.98px) {
+  #mainNavbar {
+    top: auto;
+    bottom: auto;
+    margin-top: calc(2.4rem); /* Adjust according to the height of collapsed/expanded info bar */
+  }
+
+  /* Keep info bar height minimal when collapsed */
+  #mobileInfoBar {
+    z-index: 1040;
+  }
+}
+
+.hero-section {
+    height: 100vh; /* Full screen height */
+    overflow: hidden;
+}
+
+.hero-section img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-text {
+    z-index: 2;
+}
