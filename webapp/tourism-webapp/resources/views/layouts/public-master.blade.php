@@ -15,10 +15,11 @@
     <title>M J | @yield('view_title')</title>
 </head>
 
-<body class="bg-dark-secondary">
+<body>
 
     @yield('view_content')
 
+    <script src="{{ asset('assets/jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     @yield('view_scripts')
 </body>

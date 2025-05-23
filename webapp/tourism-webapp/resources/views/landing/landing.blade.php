@@ -11,7 +11,7 @@
       <i class="bi bi-envelope-fill me-2"></i> info@mjboholtours.com
     </div>
     <div>
-      <i class="bi bi-geo-alt-fill me-2"></i> Tagbilaran City, Bohol
+      <i class="bi bi-geo-alt-fill me-2"></i> Danao, Bohol
     </div>
   </div>
 </div>
@@ -28,7 +28,7 @@
     <div class="collapse mt-2" id="mobileContactInfo">
       <div><i class="bi bi-telephone-fill me-2"></i> +63 912 345 6789</div>
       <div><i class="bi bi-envelope-fill me-2"></i> info@mjboholtours.com</div>
-      <div><i class="bi bi-geo-alt-fill me-2"></i> Tagbilaran City, Bohol</div>
+      <div><i class="bi bi-geo-alt-fill me-2"></i> Danao, Bohol</div>
     </div>
   </div>
 </div>
@@ -86,10 +86,73 @@
       <p class="text-muted">
         Join us and discover why Bohol is one of the Philippines’ top destinations. With <strong>MJ Bohol Tours</strong>, your adventure begins the moment you step aboard.
       </p>
-      <a href="#tours" class="btn btn-outline-orange mt-3">Discover Our Tours</a>
     </div>
   </div>
 </div>
+
+<!-- Tourist Spots Section -->
+<div class="container py-5" id="tours">
+  <h2 class="text-center fw-bold mb-5">Featured Tourist Spots in Bohol</h2>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+    <!-- Card 1 -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Chocolate Hills">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">Chocolate Hills</h5>
+          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Carmen, Bohol</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Loboc River Cruise">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">Loboc River Cruise</h5>
+          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Loboc, Bohol</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Tarsier Sanctuary">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">Tarsier Sanctuary</h5>
+          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Corella, Bohol</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Panglao Beach">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">Panglao Beach</h5>
+          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Panglao, Bohol</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Man-Made Forest">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">Man-Made Forest</h5>
+          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Bilar, Bohol</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 <!-- Booking Section -->
 <div class="container py-5 bg-light" id="book">
@@ -151,6 +214,12 @@
           <input type="text" class="form-control" id="pickup_location" name="pickup_location" placeholder="Enter your hotel or location" required>
         </div>
 
+         <!-- Notes -->
+        <div class="mb-3">
+          <label for="notes" class="form-label">Notes (optional)</label>
+          <textarea class="form-control" name="notes" id="notes" cols="30" rows="5"></textarea>
+        </div>
+
         <!-- Submit Button -->
         <div class="text-center mt-5">
           <button type="submit" class="btn btn-orange btn-lg px-4">Submit Booking</button>
@@ -163,50 +232,50 @@
 @endsection
 
 @section('view_scripts')
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const dropdown = document.getElementById("destinationDropdown");
-    const selectedList = document.getElementById("selectedDestinations");
+  <script>
+    $(document).ready(function () {
+      const $dropdown = $("#destinationDropdown");
+      const $selectedList = $("#selectedDestinations");
 
-    const selectedValues = new Set();
+      const selectedValues = new Set();
 
-    dropdown.addEventListener("change", function () {
-      const value = this.value;
+      $dropdown.on("change", function () {
+        const value = $(this).val();
 
-      if (value && !selectedValues.has(value)) {
-        selectedValues.add(value);
+        if (value && !selectedValues.has(value)) {
+          selectedValues.add(value);
 
-        // Create hidden input for form submission
-        const hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "destinations[]";
-        hiddenInput.value = value;
-        hiddenInput.dataset.destination = value;
+          // Create hidden input for form submission
+          const $hiddenInput = $("<input>", {
+            type: "hidden",
+            name: "destinations[]",
+            value: value,
+            "data-destination": value
+          });
 
-        // Create pill UI
-        const pill = document.createElement("div");
-        pill.className = "badge bg-orange text-white d-flex align-items-center";
-        pill.style.padding = "0.6em 0.8em";
-        pill.innerHTML = `
-          ${value}
-          <button type="button" class="btn-close btn-close-white btn-sm ms-2" aria-label="Remove" data-destination="${value}"></button>
-        `;
+          // Create visual pill element
+          const $pill = $(`
+            <div class="badge bg-orange text-white d-flex align-items-center" style="padding: 0.6em 0.8em;">
+              ${value}
+              <button type="button" class="btn-close btn-close-white btn-sm ms-2" aria-label="Remove" data-destination="${value}"></button>
+            </div>
+          `);
 
-        // Remove on click
-        pill.querySelector("button").addEventListener("click", function () {
-          const dest = this.dataset.destination;
-          selectedValues.delete(dest);
-          selectedList.querySelector(`input[data-destination="${dest}"]`)?.remove();
-          pill.remove();
-        });
+          // Remove logic
+          $pill.find("button").on("click", function () {
+            const dest = $(this).data("destination");
+            selectedValues.delete(dest);
+            $selectedList.find(`input[data-destination="${dest}"]`).remove();
+            $pill.remove();
+          });
 
-        // Append hidden input and visual pill
-        selectedList.appendChild(hiddenInput);
-        selectedList.appendChild(pill);
+          // Append to list
+          $selectedList.append($hiddenInput).append($pill);
 
-        dropdown.selectedIndex = 0; // Reset dropdown
-      }
+          // Reset dropdown
+          $dropdown.prop("selectedIndex", 0);
+        }
+      });
     });
-  });
-</script>
+  </script>
 @endsection
