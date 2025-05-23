@@ -59,12 +59,12 @@
 
   <!-- Text Content on Top of the Image -->
   <div class="hero-text position-absolute top-50 start-50 translate-middle text-center">
-    <h1 class="display-5 fw-bold">Welcome to <span class="text-orange">MJ</span> Bohol Tours</h1>
-    <p class="lead">Explore the beauty of Bohol Island</p>
+    <h1 class="display-5 fw-bold">Unforgettable Adventures with <span class="text-orange">MJ</span> Bohol Tours</h1>
+    <p class="lead">Discover the magic of Bohol — from iconic hills to hidden gems, we bring the island to life just for you.</p>
 
     <div class="mt-5">
-      <a href="#tours" class="btn btn-orange btn-lg mt-3 mx-1">Book Online</a>
-      <a href="#tours" class="btn btn-orange-outline btn-lg mt-3 mx-1">View Tours</a>
+      <a href="#book" class="btn btn-orange btn-lg mt-3 mx-1">Start Your Journey</a>
+      <a href="#tours" class="btn btn-orange-outline btn-lg mt-3 mx-1">Explore Tours</a>
     </div>
   </div>
 </div>
@@ -228,6 +228,52 @@
     </div>
   </div>
 </div>
+
+<!-- Footer -->
+<footer class="bg-white border-top mt-5">
+  <div class="container py-4">
+    <div class="row gy-4 gy-md-0">
+      
+      <!-- Company Info -->
+      <div class="col-md-4">
+        <h5 class="text-orange fw-bold">MJ Bohol Tours</h5>
+        <p class="text-muted small mb-1">Affordable van tours around Bohol, perfect for families and group getaways.</p>
+        <p class="text-muted small mb-0">
+          <i class="bi bi-geo-alt-fill me-1 text-orange"></i> Tagbilaran City, Bohol<br>
+          <i class="bi bi-envelope-fill me-1 text-orange"></i> info@mjboholtours.com<br>
+          <i class="bi bi-telephone-fill me-1 text-orange"></i> +63 912 345 6789
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-4">
+        <h6 class="fw-bold">Quick Links</h6>
+        <ul class="list-unstyled text-muted small">
+          <li><a href="#about" class="text-decoration-none text-muted">About Us</a></li>
+          <li><a href="#tours" class="text-decoration-none text-muted">Featured Tours</a></li>
+          <li><a href="#book" class="text-decoration-none text-muted">Book Now</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">FAQs</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      {{-- <div class="col-md-4">
+        <h6 class="fw-bold">Follow Us</h6>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-orange fs-5"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-orange fs-5"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-orange fs-5"><i class="bi bi-twitter-x"></i></a>
+        </div>
+        <p class="text-muted small mt-3">Let’s stay connected and make your next trip extra special!</p>
+      </div> --}}
+
+    </div>
+  </div>
+  <div class="bg-light text-center text-muted py-3 small">
+    © {{ date('Y') }} MJ Bohol Tours. All rights reserved.
+  </div>
+</footer>
+
 
 @endsection
 
