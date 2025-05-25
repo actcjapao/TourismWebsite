@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Manager\ManagerDashboardController;
 
 /*
 |--------------------------------------------------------------------------

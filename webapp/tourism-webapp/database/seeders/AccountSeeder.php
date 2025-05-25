@@ -23,5 +23,13 @@ class AccountSeeder extends Seeder
             'username' => 'admin',
             'password' => Hash::make("admin@d3v")
         ]);
+
+        Account::create([
+            'firstname' => 'Manager',
+            'lastname' => 'Dev',
+            'usertype' => 'manager',
+            'username' => 'manager',
+            'password' => Hash::make("manager@d3v")
+        ]);
     }
 }

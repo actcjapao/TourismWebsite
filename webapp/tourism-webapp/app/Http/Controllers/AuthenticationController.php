@@ -53,9 +53,9 @@ class AuthenticationController extends Controller
                     ]);
 
                     if ($user->usertype == "admin") {
-                        return redirect()->route('_loaddashboard')->with('authResponseData', $authResponseData);
+                        return redirect()->route('admin.dashboard.load')->with('authResponseData', $authResponseData);
                     } else if ($user->usertype == "manager") {
-                        return redirect()->route('_loaddashboard')->with('authResponseData', $authResponseData);
+                        return redirect()->route('manager.dashboard.load')->with('authResponseData', $authResponseData);
                     }
                 }
             }
