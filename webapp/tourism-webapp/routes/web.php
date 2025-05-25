@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ use App\Http\Controllers\LandingController;
 // });
 
 Route::get('/', [LandingController::class, 'load'])->name('landing.load');
+Route::get('/manage', [AuthenticationController::class, 'loadLogin'])->name('login.load');
