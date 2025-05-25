@@ -44,9 +44,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item mx-3"><a class="nav-link text-dark" href="#">Home</a></li>
-        <li class="nav-item mx-3"><a class="nav-link text-dark" href="#">Features</a></li>
-        <li class="nav-item mx-3"><a class="nav-link text-dark" href="#">Pricing</a></li>
+        <li class="nav-item mx-3"><a class="nav-link text-dark" href="#home">Home</a></li>
+        <li class="nav-item mx-3"><a class="nav-link text-dark" href="#about">About Us</a></li>
+        <li class="nav-item mx-3"><a class="nav-link text-dark" href="#tours">Featured</a></li>
       </ul>
     </div>
   </div>
@@ -54,7 +54,7 @@
 
 
 <!-- Hero Section with Full-width Image and Overlayed Text -->
-<div class="hero-section position-relative text-white">
+<div class="hero-section position-relative text-white" id="home">
   <img class="img-fluid w-100" src="{{ asset('assets/images/chocolatehills-raw-opacity-min.jpg') }}" alt="Chocolate Hills">
 
   <!-- Text Content on Top of the Image -->
@@ -229,6 +229,53 @@
   </div>
 </div>
 
+<!-- Testimonials Section -->
+<div class="container py-5" id="testimonials">
+  <h2 class="text-center fw-bold mb-4">What Our Guests Say</h2>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <p class="text-muted">"Super sulit! Our family enjoyed every moment — van was clean, driver was very kind."</p>
+          <h6 class="fw-bold text-orange mb-0">John D.</h6>
+          <small class="text-muted">Cebu City</small>
+        </div>
+      </div>
+    </div>
+    <!-- Add more testimonials as needed -->
+  </div>
+</div>
+
+<!-- Why Choose Us Section -->
+<div class="bg-light py-5" id="why">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">Why Choose <span class="text-orange">MJ Bohol Tours</span>?</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="p-3">
+          <i class="bi bi-person-check-fill fs-1 text-orange"></i>
+          <h5 class="fw-bold mt-2">Friendly Local Guides</h5>
+          <p class="text-muted small">Our drivers know the island like the back of their hand.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-3">
+          <i class="bi bi-wallet2 fs-1 text-orange"></i>
+          <h5 class="fw-bold mt-2">Affordable Packages</h5>
+          <p class="text-muted small">We make exploring Bohol accessible to every budget.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-3">
+          <i class="bi bi-shield-check fs-1 text-orange"></i>
+          <h5 class="fw-bold mt-2">Safe & Comfy Rides</h5>
+          <p class="text-muted small">Well-maintained vans with air-conditioning and licensed drivers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Footer -->
 <footer class="bg-white border-top mt-5">
   <div class="container py-4">
@@ -239,7 +286,7 @@
         <h5 class="text-orange fw-bold">MJ Bohol Tours</h5>
         <p class="text-muted small mb-1">Affordable van tours around Bohol, perfect for families and group getaways.</p>
         <p class="text-muted small mb-0">
-          <i class="bi bi-geo-alt-fill me-1 text-orange"></i> Tagbilaran City, Bohol<br>
+          <i class="bi bi-geo-alt-fill me-1 text-orange"></i> Danao, Bohol<br>
           <i class="bi bi-envelope-fill me-1 text-orange"></i> info@mjboholtours.com<br>
           <i class="bi bi-telephone-fill me-1 text-orange"></i> +63 912 345 6789
         </p>
@@ -253,6 +300,7 @@
           <li><a href="#tours" class="text-decoration-none text-muted">Featured Tours</a></li>
           <li><a href="#book" class="text-decoration-none text-muted">Book Now</a></li>
           <li><a href="#" class="text-decoration-none text-muted">FAQs</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">Resource Attributions</a></li>
         </ul>
       </div>
 
@@ -280,6 +328,15 @@
 @section('view_scripts')
   <script>
     $(document).ready(function () {
+      // Smooth scroll for links with hashes (e.g., #home, #about, etc.)
+      $("a[href^='#']").on('click', function (e) {
+        e.preventDefault(); // Prevent default anchor link behavior
+
+        // Get the target hash (the section ID)
+        var target = this.hash;
+        scrollNavigate(target);
+      });
+
       const $dropdown = $("#destinationDropdown");
       const $selectedList = $("#selectedDestinations");
 
@@ -300,7 +357,7 @@
           });
 
           // Create visual pill element
-          const $pill = $(`
+          const $pill = $(` 
             <div class="badge bg-orange text-white d-flex align-items-center" style="padding: 0.6em 0.8em;">
               ${value}
               <button type="button" class="btn-close btn-close-white btn-sm ms-2" aria-label="Remove" data-destination="${value}"></button>
