@@ -31,5 +31,7 @@ Route::get('/session/{operation?}', function($operation = null){
 
 Route::get('/', [LandingController::class, 'load'])->name('landing.load');
 Route::get('/manage', [AuthenticationController::class, 'loadLogin'])->name('login.load');
+Route::get('/manage/admin-dashboard', [AdminDashboardController::class, 'load'])->name('admin.dashboard.load');
+Route::get('/manage/manager-dashboard', [ManagerDashboardController::class, 'load'])->name('manager.dashboard.load');
 
 Route::post('/login', [AuthenticationController::class, 'login'])->name('account.login');
