@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigIncrements('account_id')->unsigned();
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('usertype');
             $table->string('username');
             $table->string('password');
             $table->rememberToken();

@@ -7,7 +7,18 @@
     <div class="col-sm-3"></div>  
     <div class="col-sm-6 justify-content-center bg-light pt-4 pb-5 px-5">
       <h2 class="text-center fw-bold mb-4">Login Account</h2>
-      <form action="#" method="POST">
+      <div class="text-center">
+        @if (session('authResponseData'))
+          @foreach (session('authResponseData') as $response)
+              @if ($response['status_code'] === 406)
+                  <p class="text-danger">Invalid email or password</p>
+              @elseif($response['status_code'] === 200)
+                  <p class="text-success">Authenticated</p>
+              @endif
+          @endforeach
+        @endif
+      </div>
+      <form action="{{ route('account.login') }}" method="POST">
         @csrf
 
         <!-- Username -->

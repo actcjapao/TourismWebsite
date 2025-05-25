@@ -15,9 +15,21 @@ use App\Http\Controllers\AuthenticationController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Temp Route --> This route is intended for managing session data
+Route::get('/session/{operation?}', function($operation = null){
+    if($operation == null) {
+        echo "- Specify a proper URL";
+    } else if ($operation == "view") {
+        $existingSession = session()->all();
+        dd($existingSession);
+    } else if ($operation == "clear") {
+        session()->pull('auth_token');
+    } else {
+        echo "- Specify a proper URL";
+    }
+});
 
 Route::get('/', [LandingController::class, 'load'])->name('landing.load');
 Route::get('/manage', [AuthenticationController::class, 'loadLogin'])->name('login.load');
+
+Route::post('/login', [AuthenticationController::class, 'login'])->name('account.login');
