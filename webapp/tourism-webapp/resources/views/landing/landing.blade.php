@@ -182,12 +182,6 @@
           <input type="tel" class="form-control" id="contact_number" name="contact_number" placeholder="e.g. +63 912 345 6789" required>
         </div>
 
-        <!-- Tour Date -->
-        <div class="mb-3">
-          <label for="tour_date" class="form-label">Select Tour Date</label>
-          <input type="date" class="form-control" id="tour_date" name="tour_date" required>
-        </div>
-
         <!-- Destinations Dropdown with List -->
         <div class="mb-3">
           <label for="destinationDropdown" class="form-label">Select Destination(s)</label>
@@ -206,6 +200,23 @@
         <div class="mb-3">
           <label for="guests" class="form-label">Number of Guests</label>
           <input type="number" class="form-control" id="guests" name="guests" min="1" max="20" placeholder="e.g. 2 persons" required>
+        </div>
+
+        <!-- Pickup Location and Time -->
+        <div class="mb-3">
+          <div class="row">
+            <!-- Pickup Location -->
+            <div class="col-md-7">
+              <label for="tour_date" class="form-label">Select Tour Date</label>
+              <input type="date" class="form-control" id="tour_date" name="tour_date" required>
+            </div>
+
+            <!-- Pickup Time -->
+            <div class="col-md-5">
+              <label for="pickup_time" class="form-label">Pickup Time</label>
+              <input type="time" class="form-control" id="pickup_time" name="pickup_time" required>
+            </div>
+          </div>
         </div>
 
         <!-- Pickup Location -->

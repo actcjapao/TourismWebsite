@@ -18,4 +18,5 @@ Manager
     - View bookings
     - Add Featured Websites
     - View Schedules
+    - Manage Tourist Spots (isFeatured=true/false)
 
