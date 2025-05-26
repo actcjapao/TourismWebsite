@@ -17,6 +17,9 @@
               @endif
           @endforeach
         @endif
+        @if (session()->has('access_error'))
+          <p class="text-danger">{{ session('access_error') }}</p>
+        @endif
       </div>
       <form action="{{ route('account.login') }}" method="POST">
         @csrf
