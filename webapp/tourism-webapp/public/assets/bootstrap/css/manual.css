@@ -96,3 +96,13 @@ html {
 .hero-text {
     z-index: 2;
 }
+
+/* Sidebar menu items */
+a.active_item {
+    background-color: #E5E5E5;
+    border-left: 4px solid var(--bs-orange) !important;
+}
+
+.active-item-icon, .active-item-text {
+    color: var(--bs-orange)
+}
