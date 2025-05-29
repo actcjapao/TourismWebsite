@@ -28,4 +28,16 @@ Laravelv9 x PHPv8.2
         Documentation Link: https://icons.getbootstrap.com/ 
 6. Integrate Notyf JS Library for alert framework
 Follow the steps here: https://github.com/caroso1222/notyf?tab=readme-ov-file
+7. Integrate DataTables that is compatible with Bootstrapv5 and above. Just localize and import these CDN files:
+<!-- DataTables for Bootstrap 5 -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<!-- Usage -->
+<script>
+    $(document).ready(function () {
+        $('#usersTable').DataTable();
+    });
+</script>
 
+8.
