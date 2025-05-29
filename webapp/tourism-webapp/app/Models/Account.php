@@ -16,6 +16,7 @@ class Account extends Model
         'lastname',
         'usertype',
         'username',
+        'status',
     ];
 
     protected $hidden = [

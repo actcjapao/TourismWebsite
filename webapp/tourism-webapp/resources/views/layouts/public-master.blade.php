@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/manual.css') }}">
     <link href="{{ asset('assets/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/notyf/notyf.min.css') }}" rel="stylesheet">
     @yield('view_styles')
     <title>M J | @yield('view_title')</title>
 </head>
@@ -22,6 +23,7 @@
     <script src="{{ asset('assets/jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/scripts/utils.js') }}"></script>
+    <script src="{{ asset('assets/notyf/notyf.min.js') }}"></script>
     @yield('view_scripts')
 </body>
 </html>

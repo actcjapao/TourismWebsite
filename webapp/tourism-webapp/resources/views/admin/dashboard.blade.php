@@ -13,7 +13,7 @@
     </div>
 
     <!-- Dashboard Title -->
-    <div class="row mb-4">
+    <div class="row mb-3">
         <div class="col-12">
             <h2 class="fw-semibold text-secondary">Dashboard</h2>
         </div>

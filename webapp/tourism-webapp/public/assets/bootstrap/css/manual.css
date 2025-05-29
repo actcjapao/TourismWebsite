@@ -7,14 +7,14 @@ html {
 }
 
 .bg-orange {
-    background-color: var(--bs-orange);
+    background-color: var(--bs-orange) !important;
 }
 
 /* custom btn-orange */
 .btn-orange {
-    color: #fff;
-    background-color: var(--bs-orange);
-    border-color: var(--bs-orange);
+    color: #fff !important;
+    background-color: var(--bs-orange) !important;
+    border-color: var(--bs-orange) !important;
 }
 
 .btn-orange:hover {
@@ -105,4 +105,12 @@ a.active_item {
 
 .active-item-icon, .active-item-text {
     color: var(--bs-orange)
+}
+
+.disabledTag {
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.5;
+    /* Optional: prevent focus via keyboard */
+    outline: none;
 }

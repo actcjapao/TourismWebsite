@@ -3,8 +3,15 @@
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
+
+// public
 use App\Http\Controllers\AuthenticationController;
+
+// admin
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminUsersController;
+
+// manager
 use App\Http\Controllers\Manager\ManagerDashboardController;
 
 /*
@@ -48,8 +55,13 @@ Route::get('/', [LandingController::class, 'load'])->name('landing.load');
 // cja: authentication middleware routers implementation
 Route::middleware(['authentication'])->group(function () {
     Route::get('/manage', [AuthenticationController::class, 'loadLogin'])->name('login.load');
+    
     Route::get('/manage/admin/dashboard', [AdminDashboardController::class, 'load'])->name('admin.dashboard.load');
+    Route::get('/manage/admin/users', [AdminUsersController::class, 'load'])->name('admin.users.load');
+
     Route::get('/manage/manager/dashboard', [ManagerDashboardController::class, 'load'])->name('manager.dashboard.load');
 });
 
 Route::post('/login', [AuthenticationController::class, 'login'])->name('account.login');
+
+Route::post('/save-user', [AdminUsersController::class, 'saveUser'])->name('user.save');

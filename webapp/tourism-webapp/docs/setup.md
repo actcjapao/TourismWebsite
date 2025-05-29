@@ -26,3 +26,6 @@ Laravelv9 x PHPv8.2
     5. Link the CSS in Your HTML/Blade File
     6. Test the icons `<i class="bi bi-telephone-fill"></i>` <br />
         Documentation Link: https://icons.getbootstrap.com/ 
+6. Integrate Notyf JS Library for alert framework
+Follow the steps here: https://github.com/caroso1222/notyf?tab=readme-ov-file
+
