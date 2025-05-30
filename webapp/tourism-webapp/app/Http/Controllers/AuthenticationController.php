@@ -44,9 +44,16 @@ class AuthenticationController extends Controller
                     ];
 
                     $auth_token = Hash::make(json_encode($objectToken));
-                    session()->put('auth_token', $auth_token);
-                    session()->put('authenticated_id', $user->account_id);
-                    session()->put('authenticated_usertype', $user->usertype);
+                    $authenticatedUser = (object) [
+                        'auth_token' => $auth_token,
+                        'account_id' => $user->account_id,
+                        'firstname' => $user->firstname,
+                        'lastname' => $user->lastname,
+                        'usertype' => $user->usertype,
+                        'username' => $user->username
+                    ];
+
+                    session()->put('authenticated_user', $authenticatedUser);
 
                     array_push($authResponseData, [
                         'status_code' => 200,

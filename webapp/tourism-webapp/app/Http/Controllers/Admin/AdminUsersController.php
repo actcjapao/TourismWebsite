@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\Account;
 
@@ -74,30 +75,11 @@ class AdminUsersController extends Controller
                 $newAccount->lastname = $request->input('lastname');
                 $newAccount->username = $request->input('username');
                 $newAccount->usertype = $request->input('usertype');
-                $newAccount->password = $request->input('password');
+                $newAccount->password = Hash::make($request->input('password'));
                 $isSaveQuerySuccess = $newAccount->save();
 
                 $newAccountId = $newAccount->id;
-            } else {
-                // $project = ProjectModel::join('tbl_project_details AS details', 'tbl_projects.project_detail_id', '=', 'details.pd_id')
-                //                    ->where('tbl_projects.project_id', '=', $r->project_id);
-                // $isSaveQuerySuccess = $project->update(
-                //     [
-                //         'details.pd_title' => $r->input('project_details.project_title'),
-                //         'details.pd_short_overview' => $r->input('project_details.short_overview'),
-                //         'details.pd_long_overview' => $r->input('project_details.long_overview'),
-                //         'details.pd_img_url' => $r->input('project_details.project_img_url'),
-                //         'details.pd_link' => $r->input('project_details.project_link'),
-                //         'tbl_projects.project_is_display' => $r->input('project.project_visibility'),
-                //         'tbl_projects.project_status' => $r->input('project.project_status')
-                //     ]
-                // );
-                
-                return response()->json([
-                    'status' => 200,
-                    'message' => "Success: Ready to update",
-                ], 200);
-            }
+            } 
 
             if($isSaveQuerySuccess) {
                 return response()->json([

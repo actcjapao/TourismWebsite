@@ -17,8 +17,14 @@ class AuthenticationMiddleware
     public function handle(Request $request, Closure $next)
     {
         $path = $request->path();
-        $usertype = session('authenticated_usertype');
-        $isAuthenticated = session()->has('auth_token');
+        $authenticatedUser = session('authenticated_user');
+        $isAuthenticated = false;        
+        $usertype = null;
+
+        if($authenticatedUser) {
+            $usertype = $authenticatedUser->usertype;
+            $isAuthenticated = $authenticatedUser && isset($authenticatedUser->auth_token);
+        }
 
         // If not logged in and trying to access anything other than 'manage'
         if (!$isAuthenticated && $path != 'manage') {

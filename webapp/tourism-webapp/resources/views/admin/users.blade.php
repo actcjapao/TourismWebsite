@@ -22,30 +22,32 @@
     <div class="row">
         <div class="col-12">
             <div class="card shadow-sm border-0">
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0 align-middle">
+                <div class="card-body">
+                    <div class="table-responsive mx-1 my-1 py-3 px-2">
+                        <table class="table table-hover" id="accountTable">
                             <thead class="table-white">
                                 <tr>
+                                    <th>Account ID</th>
                                     <th>Full Name</th>
                                     <th>Username</th>
                                     <th>User Type</th>
                                     <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($accounts as $account)
+                                @foreach ($accounts as $account)
                                     <tr account-id="{{ $account->account_id }}">
+                                        <td>{{ $account->account_id }}</td>
                                         <td>{{ $account->firstname }} {{ $account->lastname }}</td>
                                         <td>{{ $account->username }}</td>
                                         <td>{{ ucfirst($account->usertype) }}</td>
                                         <td>{{ $account->status }}</td>
+                                        <td>
+                                            <i account-id="{{ $account->account_id }}" class="bi bi-pencil-fill" onclick="alert('Functionality not yet available')"></i>
+                                        </td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center text-muted py-4">No accounts found.</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -108,8 +110,22 @@
 
 @section('view_scripts')
 <script>
-    function renderSavedRecordToTable(account_id, formData) {
+    $(document).ready(function () {
+        $('#accountTable').DataTable({
+            columns: [
+                { data: 'account_id' },
+                { data: 'fullname' },
+                { data: 'username' },
+                { data: 'usertype' },
+                { data: 'status' },
+                { data: 'actions', orderable: false, searchable: false }
+            ]
+        });
+    });
 
+    function addRowToDataTable(new_row) {
+        let accountTable = $('#accountTable').DataTable();
+        accountTable.row.add({ ...new_row }).draw();
     }
 
     $("#save_account_form").submit(function(e) {
@@ -142,8 +158,20 @@
                 const { status, message, account_id } = response
                 if (status == 200) {
                     $('#save_account_form')[0].reset();
-                    $('#addAccountModal').modal('hide');
+                    
+                    $('#addAccountModal').modal('hide'); 
+
+                    addRowToDataTable({ 
+                        account_id, 
+                        fullname: `${formData.firstname} ${formData.lastname}`, 
+                        username: formData.username,
+                        usertype: formData.usertype, 
+                        status: 'active',
+                        actions: `<i account-id="${ account_id }" class="bi bi-pencil-fill" onclick="alert('Functionality not yet available')"></i>`
+                    });
+
                     showNotyf(message);
+                    
                     loadingState($('#btnSaveAccount'), false, 'Save Account');
                 }
             },
