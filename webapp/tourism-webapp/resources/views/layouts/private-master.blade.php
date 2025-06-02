@@ -62,7 +62,7 @@ $user = session('authenticated_user');
                         <span class="ms-2 {{ $page == "manager_dashboard" ? "active-item-text" : ""}}">Dashboard</span>
                     </a>
 
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "manager_bookings" ? "active_item" : ""}}">
+                    <a href="{{ route('manager.bookings.load') }}" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "manager_bookings" ? "active_item" : ""}}">
                         <i class="bi bi-calendar-check {{ $page == "manager_bookings" ? "active-item-icon" : ""}}"></i>
                         <span class="ms-2 {{ $page == "manager_bookings" ? "active-item-text" : ""}}">Bookings</span>
                     </a>

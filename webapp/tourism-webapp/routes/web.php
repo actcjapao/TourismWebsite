@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminUsersController;
 
 // manager
 use App\Http\Controllers\Manager\ManagerDashboardController;
+use App\Http\Controllers\Manager\ManagerBookingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,7 @@ Route::middleware(['authentication'])->group(function () {
     Route::get('/manage/admin/users', [AdminUsersController::class, 'load'])->name('admin.users.load');
 
     Route::get('/manage/manager/dashboard', [ManagerDashboardController::class, 'load'])->name('manager.dashboard.load');
+    Route::get('/manage/manager/bookings', [ManagerBookingsController::class, 'load'])->name('manager.bookings.load');
 });
 
 Route::post('/login', [AuthenticationController::class, 'login'])->name('account.login');
