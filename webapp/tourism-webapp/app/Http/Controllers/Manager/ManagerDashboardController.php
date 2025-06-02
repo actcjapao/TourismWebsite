@@ -7,7 +7,15 @@ use Illuminate\Http\Request;
 
 class ManagerDashboardController extends Controller
 {
+    private $page;
+
+    public function __construct()
+    {
+        $this->page = "manager_dashboard";
+    }
+
     function load() {
-        return view('manager/dashboard');
+        $page = $this->page;
+        return view('manager/dashboard', compact('page'));
     }
 }

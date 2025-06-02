@@ -33,30 +33,42 @@ $user = session('authenticated_user');
                 </div>
             </div>
             <div class="list-group list-group-flush">
-                <a href="{{ route('admin.dashboard.load') }}" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_dashboard" ? "active_item" : ""}}">
-                    <i class="bi bi-bar-chart-line {{ $page == "admin_dashboard" ? "active-item-icon" : ""}}"></i>
-                    <span class="ms-2 {{ $page == "admin_dashboard" ? "active-item-text" : ""}}">Dashboard</span>
-                </a>
+                @if ($user->usertype == 'admin')
+                    <a href="{{ route('admin.dashboard.load') }}" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_dashboard" ? "active_item" : ""}}">
+                        <i class="bi bi-bar-chart-line {{ $page == "admin_dashboard" ? "active-item-icon" : ""}}"></i>
+                        <span class="ms-2 {{ $page == "admin_dashboard" ? "active-item-text" : ""}}">Dashboard</span>
+                    </a>
 
-                <a href="#" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_bookings" ? "active_item" : ""}}">
-                    <i class="bi bi-calendar-check {{ $page == "admin_bookings" ? "active-item-icon" : ""}}"></i>
-                    <span class="ms-2 {{ $page == "admin_bookings" ? "active-item-text" : ""}}">Bookings</span>
-                </a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_bookings" ? "active_item" : ""}}">
+                        <i class="bi bi-calendar-check {{ $page == "admin_bookings" ? "active-item-icon" : ""}}"></i>
+                        <span class="ms-2 {{ $page == "admin_bookings" ? "active-item-text" : ""}}">Bookings</span>
+                    </a>
 
-                {{-- For manager --}}
-                {{-- <a class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_vans" ? "active_item" : ""}}">
-                    <i class="bi bi-calendar-check {{ $page == "admin_vans" ? "active-item-icon" : ""}}"></i>
-                    <span class="ms-2 {{ $page == "admin_vans" ? "active-item-text" : ""}}">Vans</span>
-                </a> --}}
+                    {{-- For manager --}}
+                    {{-- <a class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_vans" ? "active_item" : ""}}">
+                        <i class="bi bi-calendar-check {{ $page == "admin_vans" ? "active-item-icon" : ""}}"></i>
+                        <span class="ms-2 {{ $page == "admin_vans" ? "active-item-text" : ""}}">Vans</span>
+                    </a> --}}
 
-                <a href="{{ route('admin.users.load') }}" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_users" ? "active_item" : ""}}">
-                    <i class="bi bi-people {{ $page == "admin_users" ? "active-item-icon" : ""}}"></i>
-                    <span class="ms-2 {{ $page == "admin_users" ? "active-item-text" : ""}}">Users</span>
-                </a>
+                    <a href="{{ route('admin.users.load') }}" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_users" ? "active_item" : ""}}">
+                        <i class="bi bi-people {{ $page == "admin_users" ? "active-item-icon" : ""}}"></i>
+                        <span class="ms-2 {{ $page == "admin_users" ? "active-item-text" : ""}}">Users</span>
+                    </a>
+                @endif
 
-                <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3"
-                href="/SupervisorAttendance/AttendanceList"
-                data-bs-toggle="modal" data-bs-target="#confirm_logout_modal">
+                @if ($user->usertype == 'manager')
+                    <a href="{{ route('manager.dashboard.load') }}" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "manager_dashboard" ? "active_item" : ""}}">
+                        <i class="bi bi-bar-chart-line {{ $page == "manager_dashboard" ? "active-item-icon" : ""}}"></i>
+                        <span class="ms-2 {{ $page == "manager_dashboard" ? "active-item-text" : ""}}">Dashboard</span>
+                    </a>
+
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "manager_bookings" ? "active_item" : ""}}">
+                        <i class="bi bi-calendar-check {{ $page == "manager_bookings" ? "active-item-icon" : ""}}"></i>
+                        <span class="ms-2 {{ $page == "manager_bookings" ? "active-item-text" : ""}}">Bookings</span>
+                    </a>
+                @endif
+
+                <a href="#" class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" data-bs-toggle="modal" data-bs-target="#confirm_logout_modal">
                     <i class="bi bi-box-arrow-right"></i>
                     <span class="ms-2 text-secondary">Logout</span>
                 </a>
@@ -72,7 +84,7 @@ $user = session('authenticated_user');
 
                     <span class="ms-sm-2 text-dark font-weight-600">{{ $user->firstname.' '.$user->lastname }}</span> 
                     &nbsp; <span class="font-weight-600 text-secondary">|</span> &nbsp;
-                    <span class="badge bg-success"><i class="bi bi-shield-fill-check"></i> {{ $user->usertype }}</span>
+                    <span class="badge bg-success text-uppercase"><i class="bi bi-shield-fill-check"></i> {{ $user->usertype }}</span>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 mx-4 my-2">
