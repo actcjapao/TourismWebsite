@@ -39,8 +39,8 @@ $user = session('authenticated_user');
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-uppercase fw-semibold text-muted mb-2">Available Vans</p>
-                    <h3 class="fw-semibold text-info">5</h3>
+                    <p class="text-uppercase fw-semibold text-muted mb-2">Available Van(s)</p>
+                    <h3 class="fw-semibold text-info">1</h3>
                 </div>
             </div>
         </div>
