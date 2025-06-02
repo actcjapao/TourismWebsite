@@ -33,12 +33,12 @@ $user = session('authenticated_user');
                 </div>
             </div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_dashboard" ? "active_item" : ""}}">
+                <a href="{{ route('admin.dashboard.load') }}" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_dashboard" ? "active_item" : ""}}">
                     <i class="bi bi-bar-chart-line {{ $page == "admin_dashboard" ? "active-item-icon" : ""}}"></i>
                     <span class="ms-2 {{ $page == "admin_dashboard" ? "active-item-text" : ""}}">Dashboard</span>
                 </a>
 
-                <a class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_bookings" ? "active_item" : ""}}">
+                <a href="#" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_bookings" ? "active_item" : ""}}">
                     <i class="bi bi-calendar-check {{ $page == "admin_bookings" ? "active-item-icon" : ""}}"></i>
                     <span class="ms-2 {{ $page == "admin_bookings" ? "active-item-text" : ""}}">Bookings</span>
                 </a>
@@ -49,7 +49,7 @@ $user = session('authenticated_user');
                     <span class="ms-2 {{ $page == "admin_vans" ? "active-item-text" : ""}}">Vans</span>
                 </a> --}}
 
-                <a class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_users" ? "active_item" : ""}}">
+                <a href="{{ route('admin.users.load') }}" class="list-group-item list-group-item-action list-group-item-light border-top p-3 {{ $page == "admin_users" ? "active_item" : ""}}">
                     <i class="bi bi-people {{ $page == "admin_users" ? "active-item-icon" : ""}}"></i>
                     <span class="ms-2 {{ $page == "admin_users" ? "active-item-text" : ""}}">Users</span>
                 </a>
