@@ -20,6 +20,9 @@
         @if (session()->has('access_error'))
           <p class="text-danger">{{ session('access_error') }}</p>
         @endif
+        @if (session()->has('loggedout_message'))
+            <p class="text-success">{{ session('loggedout_message') }}</p>
+        @endif
       </div>
       <form action="{{ route('account.login') }}" method="POST">
         @csrf

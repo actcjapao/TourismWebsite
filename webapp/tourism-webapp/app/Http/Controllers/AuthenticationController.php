@@ -84,4 +84,12 @@ class AuthenticationController extends Controller
         
         return redirect()->back()->with('authResponseData', $authResponseData);
     }
+
+    function logout() {
+        if(session()->has('authenticated_user'))
+        {
+            session()->flush();
+            return redirect()->route('login.load')->with('loggedout_message', 'You have been successfully logged out');
+        }
+    }
 }

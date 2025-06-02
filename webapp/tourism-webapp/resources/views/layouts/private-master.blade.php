@@ -56,7 +56,7 @@ $user = session('authenticated_user');
 
                 <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3"
                 href="/SupervisorAttendance/AttendanceList"
-                data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal">
+                data-bs-toggle="modal" data-bs-target="#confirm_logout_modal">
                     <i class="bi bi-box-arrow-right"></i>
                     <span class="ms-2 text-secondary">Logout</span>
                 </a>
@@ -86,40 +86,28 @@ $user = session('authenticated_user');
 
             <!-- Page content-->
             @yield('view_content')
-            {{-- <div class="container-fluid">
-                <div class="row ps-5 pt-5">
-                    <div class="col-sm-12">
-                        <p class="text-secondary" style="font-size: 1.5rem">Dashboard</p>
-                    </div>
-                </div>
+        </div>
+    </div>
 
-                <div class="row px-5">
-                    <div class="col-sm-4">
-                        <div class="bg-white card-shadow px-3 py-2">
-                            <div class="card-body">
-                                <p class="mb-2 text-theme-1 font-weight-600">Counter Orders</p>
-                                <h1 class="text-secondary display-5">1</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="bg-white card-shadow px-3 py-2">
-                            <div class="card-body">
-                                <p class="mb-2 text-theme-1 font-weight-600">Reservation Orders</p>
-                                <h1 class="text-secondary display-5">2</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="bg-white card-shadow px-3 py-2">
-                            <div class="card-body">
-                                <p class="mb-2 text-theme-1 font-weight-600">Take-Out Orders</p>
-                                <h1 class="text-secondary display-5">3</h1>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="confirm_logout_modal" tabindex="-1" role="dialog"
+        aria-labelledby="confirm_logout_modal_label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirm_logout_modal_label">Confirm Logout</h5>
                 </div>
-            </div> --}}
+                <div class="modal-body">
+                    Are you sure you want to logout?
+                </div>
+                <div class="modal-footer">
+                    <form action="{{ route('account.logout') }}" method="post">
+                        @csrf
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

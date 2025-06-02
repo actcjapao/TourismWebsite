@@ -63,5 +63,6 @@ Route::middleware(['authentication'])->group(function () {
 });
 
 Route::post('/login', [AuthenticationController::class, 'login'])->name('account.login');
+Route::post('/logout', [AuthenticationController::class, 'logout'])->name('account.logout');
 
 Route::post('/save-user', [AdminUsersController::class, 'saveUser'])->name('user.save');
