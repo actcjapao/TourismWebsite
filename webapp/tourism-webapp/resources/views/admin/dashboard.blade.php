@@ -1,13 +1,17 @@
 @extends('layouts.private-master')
 @section('view_title', 'Dashboard')
 
+@php
+$user = session('authenticated_user');
+@endphp
+
 @section('view_content')
 <div class="container-fluid py-4 px-md-4 px-3 bg-light min-vh-100">
 
     <!-- Welcome Message -->
     <div class="row mb-3">
         <div class="col-12">
-            <h4 class="fw-bold text-orange">Welcome, Admin Cariel!</h4>
+            <h4 class="fw-bold text-orange">Welcome, Admin {{ $user->firstname }}!</h4>
             <p class="text-muted mb-0">Here’s an overview of today’s activities and stats.</p>
         </div>
     </div>

@@ -1,3 +1,7 @@
+@php
+$user = session('authenticated_user');
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -66,9 +70,9 @@
                 <div class="container-fluid">
                     <button class="btn btn-default mx-2" id="sidebarToggle"><i class="fas fa-bars text-dark"></i></button>
 
-                    <span class="ms-sm-2 text-dark font-weight-600">Cariel Jay Apao</span> 
+                    <span class="ms-sm-2 text-dark font-weight-600">{{ $user->firstname.' '.$user->lastname }}</span> 
                     &nbsp; <span class="font-weight-600 text-secondary">|</span> &nbsp;
-                    <span class="badge bg-success"><i class="bi bi-shield-fill-check"></i> {{ session('authenticated_usertype') }}</span>
+                    <span class="badge bg-success"><i class="bi bi-shield-fill-check"></i> {{ $user->usertype }}</span>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 mx-4 my-2">
