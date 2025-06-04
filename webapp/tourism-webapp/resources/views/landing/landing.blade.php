@@ -95,60 +95,63 @@
   <h2 class="text-center fw-bold mb-5">Featured Tourist Spots in Bohol</h2>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
-    <!-- Card 1 -->
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Chocolate Hills">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">Chocolate Hills</h5>
-          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Carmen, Bohol</p>
-        </div>
-      </div>
-    </div>
+    <!-- Card Template -->
+    @php
+      $spots = [
+        [
+          'title' => 'Chocolate Hills',
+          'location' => 'Carmen, Bohol',
+          'image' => 'chocolatehills-raw-airial-view-1.png',
+          'alt' => 'Chocolate Hills',
+          'source' => 'Image source: Unsplash'
+        ],
+        [
+          'title' => 'Loboc River Cruise',
+          'location' => 'Loboc, Bohol',
+          'image' => 'loboc-river-cruise.jpg',
+          'alt' => 'Loboc River Cruise',
+          'source' => 'Image source: Wikimedia Commons'
+        ],
+        [
+          'title' => 'Tarsier Sanctuary',
+          'location' => 'Corella, Bohol',
+          'image' => 'tarsier-sanctuary.jpg',
+          'alt' => 'Tarsier Sanctuary',
+          'source' => 'Image source: Pexels'
+        ],
+        [
+          'title' => 'Panglao Beach',
+          'location' => 'Panglao, Bohol',
+          'image' => 'panglao-beach.jpg',
+          'alt' => 'Panglao Beach',
+          'source' => 'Image source: Unsplash'
+        ],
+        [
+          'title' => 'Man-Made Forest',
+          'location' => 'Bilar, Bohol',
+          'image' => 'man-made-forest.jpg',
+          'alt' => 'Man-Made Forest',
+          'source' => 'Image source: Wikimedia Commons'
+        ]
+      ];
+    @endphp
 
-    <!-- Card 2 -->
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Loboc River Cruise">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">Loboc River Cruise</h5>
-          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Loboc, Bohol</p>
+    @foreach($spots as $spot)
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="ratio ratio-4x3">
+            <img src="{{ asset('assets/images/' . $spot['image']) }}" class="card-img-top object-fit-cover" alt="{{ $spot['alt'] }}">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fw-bold">{{ $spot['title'] }}</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-geo-alt-fill text-orange me-2"></i>{{ $spot['location'] }}
+            </p>
+            <small class="text-secondary d-block mt-2">{{ $spot['source'] }}</small>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Tarsier Sanctuary">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">Tarsier Sanctuary</h5>
-          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Corella, Bohol</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Panglao Beach">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">Panglao Beach</h5>
-          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Panglao, Bohol</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="{{ asset('assets/images/chocolatehills-raw-airial-view-1.png') }}" class="card-img-top" alt="Man-Made Forest">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">Man-Made Forest</h5>
-          <p class="card-text text-muted"><i class="bi bi-geo-alt-fill text-orange me-2"></i>Bilar, Bohol</p>
-        </div>
-      </div>
-    </div>
+    @endforeach
 
   </div>
 </div>
