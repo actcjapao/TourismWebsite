@@ -1,3 +1,9 @@
+### How to create a single seeder
+
+```sh
+php artisan make:seeder SeederName
+```
+
 ### How to run a specific seeder
 
 ```sh
