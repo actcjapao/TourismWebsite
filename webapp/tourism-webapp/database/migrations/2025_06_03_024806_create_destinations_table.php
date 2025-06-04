@@ -17,7 +17,10 @@ return new class extends Migration
             $table->bigIncrements('destination_id')->unsigned();
             $table->text('name');
             $table->text('address');
-            $table->text('img_url');
+            $table->text('cloudinary_url')->nullable();
+            $table->string('local_url')->nullable();
+            $table->string('alt');
+            $table->string('source')->nullable(); // for attribution purposes
             $table->string('status')->default('normal'); // featured, normal, inactive
             $table->timestamps();
         });

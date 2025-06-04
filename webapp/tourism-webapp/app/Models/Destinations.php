@@ -14,7 +14,10 @@ class Destinations extends Model
     protected $fillable = [
         'name',
         'address',
-        'img_url',
+        'cloudinary_url',
+        'local_url',
+        'alt',
+        'source',
         'status'
     ];
 }
