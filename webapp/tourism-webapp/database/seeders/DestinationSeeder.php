@@ -20,7 +20,8 @@ class DestinationSeeder extends Seeder
             'address' => 'Carmen, Bohol',
             'local_url' => 'assets/images/destinations/chocolate_hills/chocolate_hills-1-min.jpg',
             'alt' => 'Image of Chocolate Hills',
-            'source' => ''
+            'source' => '',
+            'status' => 'featured'
         ]);
 
         Destinations::create([
@@ -28,7 +29,8 @@ class DestinationSeeder extends Seeder
             'address' => 'Loboc, Bohol',
             'local_url' => 'assets/images/destinations/loboc_river/loboc_river-2-min.jpg',
             'alt' => 'Image of Loboc River and Floating Restaurant',
-            'source' => '@klook'
+            'source' => '@klook',
+            'status' => 'featured'
         ]);
 
         Destinations::create([
@@ -36,7 +38,8 @@ class DestinationSeeder extends Seeder
             'address' => 'Bilar, Bohol',
             'local_url' => 'assets/images/destinations/bilar_man_made_forest/bilar_man_made_forest-1-min.jpg',
             'alt' => 'Image of Man-made forest',
-            'source' => 'Philippine Embassy in Switzerland Facebook Page'
+            'source' => 'PH Embassy Switzerland FB Page',
+            'status' => 'featured'
         ]);
 
         Destinations::create([
@@ -44,7 +47,8 @@ class DestinationSeeder extends Seeder
             'address' => 'Panglao, Bohol',
             'local_url' => 'assets/images/destinations/alona_beach/alona_beach-1-min.jpg',
             'alt' => 'Image of Alona Beach',
-            'source' => '@inzywinzyspider on Instagram'
+            'source' => '@inzywinzyspider on Instagram',
+            'status' => 'featured'
         ]);
 
         Destinations::create([
@@ -52,7 +56,8 @@ class DestinationSeeder extends Seeder
             'address' => 'Bohol, Philippines',
             'local_url' => 'assets/images/destinations/ph_tarsier_sanctuary/ph_tarsier_sanctuary-1-min.jpg',
             'alt' => 'Image of Tarsier',
-            'source' => '@arjiedj on Instagram'
+            'source' => '@arjiedj on Instagram',
+            'status' => 'featured'
         ]);
 
         Destinations::create([
@@ -60,7 +65,8 @@ class DestinationSeeder extends Seeder
             'address' => 'Danao, Bohol',
             'local_url' => 'assets/images/destinations/danao_adventure_park/danao_adventure_park-1-min.jpg',
             'alt' => 'Image of a man about to go to swing',
-            'source' => '@clarkkhent14 on Instagram'
+            'source' => '@clarkkhent14 on Instagram',
+            'status' => 'featured'
         ]);
 
         Destinations::create([
@@ -68,7 +74,8 @@ class DestinationSeeder extends Seeder
             'address' => 'Alicia, Bohol',
             'local_url' => 'assets/images/destinations/alicia_panoramic_park/alicia_panoramic_park-1-min.jpg',
             'alt' => 'Image of Top Hills',
-            'source' => '@missdiyown on Instagram'
+            'source' => '@missdiyown on Instagram',
+            'status' => 'featured'
         ]);
 
         Destinations::create([

@@ -6,12 +6,12 @@
 <div class="bg-orange text-white py-1 small d-none d-md-block fixed-top" id="topInfoBar">
   <div class="container d-flex justify-content-between align-items-center">
     <div>
-      <i class="bi bi-telephone-fill me-2"></i> +63 912 345 6789
+      <i class="bi bi-telephone-fill me-2"></i> {{ $basicInfo->contact }}
       <span class="mx-3">|</span>
-      <i class="bi bi-envelope-fill me-2"></i> info@mjboholtours.com
+      <i class="bi bi-envelope-fill me-2"></i> {{ $basicInfo->email }}
     </div>
     <div>
-      <i class="bi bi-geo-alt-fill me-2"></i> Danao, Bohol
+      <i class="bi bi-geo-alt-fill me-2"></i> {{ $basicInfo->address }}
     </div>
   </div>
 </div>
@@ -26,9 +26,9 @@
       </button>
     </div>
     <div class="collapse mt-2" id="mobileContactInfo">
-      <div><i class="bi bi-telephone-fill me-2"></i> +63 912 345 6789</div>
-      <div><i class="bi bi-envelope-fill me-2"></i> info@mjboholtours.com</div>
-      <div><i class="bi bi-geo-alt-fill me-2"></i> Danao, Bohol</div>
+      <div><i class="bi bi-telephone-fill me-2"></i> {{ $basicInfo->contact }}</div>
+      <div><i class="bi bi-envelope-fill me-2"></i> {{ $basicInfo->email }}</div>
+      <div><i class="bi bi-geo-alt-fill me-2"></i> {{ $basicInfo->address }}</div>
     </div>
   </div>
 </div>
@@ -95,62 +95,23 @@
   <h2 class="text-center fw-bold mb-5">Featured Tourist Spots in Bohol</h2>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
-    <!-- Card Template -->
-    @php
-      $spots = [
-        [
-          'title' => 'Chocolate Hills',
-          'location' => 'Carmen, Bohol',
-          'image' => 'chocolatehills-raw-airial-view-1.png',
-          'alt' => 'Chocolate Hills',
-          'source' => 'Image source: Unsplash'
-        ],
-        [
-          'title' => 'Loboc River Cruise',
-          'location' => 'Loboc, Bohol',
-          'image' => 'loboc-river-cruise.jpg',
-          'alt' => 'Loboc River Cruise',
-          'source' => 'Image source: Wikimedia Commons'
-        ],
-        [
-          'title' => 'Tarsier Sanctuary',
-          'location' => 'Corella, Bohol',
-          'image' => 'tarsier-sanctuary.jpg',
-          'alt' => 'Tarsier Sanctuary',
-          'source' => 'Image source: Pexels'
-        ],
-        [
-          'title' => 'Panglao Beach',
-          'location' => 'Panglao, Bohol',
-          'image' => 'panglao-beach.jpg',
-          'alt' => 'Panglao Beach',
-          'source' => 'Image source: Unsplash'
-        ],
-        [
-          'title' => 'Man-Made Forest',
-          'location' => 'Bilar, Bohol',
-          'image' => 'man-made-forest.jpg',
-          'alt' => 'Man-Made Forest',
-          'source' => 'Image source: Wikimedia Commons'
-        ]
-      ];
-    @endphp
-
-    @foreach($spots as $spot)
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          <div class="ratio ratio-4x3">
-            <img src="{{ asset('assets/images/' . $spot['image']) }}" class="card-img-top object-fit-cover" alt="{{ $spot['alt'] }}">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title fw-bold">{{ $spot['title'] }}</h5>
-            <p class="card-text text-muted">
-              <i class="bi bi-geo-alt-fill text-orange me-2"></i>{{ $spot['location'] }}
-            </p>
-            <small class="text-secondary d-block mt-2">{{ $spot['source'] }}</small>
+    @foreach($destinations as $d)
+      @if ($d->status == "featured")
+        <div class="col" destination-id="{{ $d->destination_id }}">
+          <div class="card h-100 shadow-sm">
+            <div class="ratio ratio-4x3">
+              <img src="{{ asset($d->local_url) }}" class="card-img-top object-fit-cover" alt="{{ $d->alt }}">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title fw-bold">{{ $d->name }}</h5>
+              <p class="card-text text-muted">
+                <i class="bi bi-geo-alt-fill text-orange me-2"></i>{{ $d->address }}
+              </p>
+              <small class="text-secondary d-block mt-2">Source: {{ $d->source }}</small>
+            </div>
           </div>
         </div>
-      </div>
+      @endif
     @endforeach
 
   </div>
@@ -190,8 +151,8 @@
           <label for="destinationDropdown" class="form-label">Select Destination(s)</label>
           <select id="destinationDropdown" class="form-select">
             <option selected disabled>Choose a destination</option>
-            @foreach(['Chocolate Hills', 'Loboc River Cruise', 'Tarsier Sanctuary', 'Panglao Beach', 'Man-Made Forest'] as $destination)
-              <option value="{{ $destination }}">{{ $destination }}</option>
+            @foreach($destinations as $d)
+              <option value="{{ $d->destination_id }}">{{ $d->name }}</option>
             @endforeach
           </select>
 
@@ -297,12 +258,12 @@
       
       <!-- Company Info -->
       <div class="col-md-4">
-        <h5 class="text-orange fw-bold">MJ Bohol Tours</h5>
+        <h5 class="text-orange fw-bold">{{ $basicInfo->site }}</h5>
         <p class="text-muted small mb-1">Affordable van tours around Bohol, perfect for families and group getaways.</p>
         <p class="text-muted small mb-0">
-          <i class="bi bi-geo-alt-fill me-1 text-orange"></i> Danao, Bohol<br>
-          <i class="bi bi-envelope-fill me-1 text-orange"></i> info@mjboholtours.com<br>
-          <i class="bi bi-telephone-fill me-1 text-orange"></i> +63 912 345 6789
+          <i class="bi bi-geo-alt-fill me-1 text-orange"></i> {{ $basicInfo->address }}<br>
+          <i class="bi bi-envelope-fill me-1 text-orange"></i> {{ $basicInfo->email }}<br>
+          <i class="bi bi-telephone-fill me-1 text-orange"></i> {{ $basicInfo->contact }}
         </p>
       </div>
 
