@@ -40,7 +40,7 @@ class AdminUsersController extends Controller
     }
 
     function saveUser(Request $request) {
-         // validation rules
+        // validation rules
         $rules = [
             'firstname' => 'required',
             'lastname' => 'required',

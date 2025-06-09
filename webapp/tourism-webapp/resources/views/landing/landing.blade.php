@@ -125,25 +125,25 @@
       <h2 class="text-center fw-bold mb-4">Book Your Bohol Adventure</h2>
       <p class="text-center text-muted mb-4">Choose your destination, set your date, and we'll handle the rest!</p>
 
-      <form action="#" method="POST">
+      <form action="{{ route('booking.submit')}}" method="POST" id="submitBookingForm">
         @csrf
 
         <!-- Full Name -->
         <div class="mb-3">
-          <label for="name" class="form-label">Full Name</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Your full name" required>
+          <label for="fullname" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Your full name">
         </div>
 
         <!-- Email Address -->
         <div class="mb-3">
           <label for="email" class="form-label">Email Address</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.com" required>
+          <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.com">
         </div>
 
         <!-- Contact Number -->
         <div class="mb-3">
           <label for="contact_number" class="form-label">Contact Number</label>
-          <input type="tel" class="form-control" id="contact_number" name="contact_number" placeholder="e.g. +63 912 345 6789" required>
+          <input type="tel" class="form-control" id="contact_number" name="contact_number" placeholder="e.g. +63 912 345 6789">
         </div>
 
         <!-- Destinations Dropdown with List -->
@@ -152,7 +152,7 @@
           <select id="destinationDropdown" class="form-select">
             <option selected disabled>Choose a destination</option>
             @foreach($destinations as $d)
-              <option value="{{ $d->destination_id }}">{{ $d->name }}</option>
+              <option value="{{ $d->destination_id }}" data-name="{{ $d->name }}">{{ $d->name }}</option>
             @endforeach
           </select>
 
@@ -163,7 +163,7 @@
         <!-- Number of Guests -->
         <div class="mb-3">
           <label for="guests" class="form-label">Number of Guests</label>
-          <input type="number" class="form-control" id="guests" name="guests" min="1" max="20" placeholder="e.g. 2 persons" required>
+          <input type="number" class="form-control" id="guests" name="guests" min="1" max="30" placeholder="e.g. 2 persons">
         </div>
 
         <!-- Pickup Location and Time -->
@@ -172,13 +172,13 @@
             <!-- Pickup Location -->
             <div class="col-md-7">
               <label for="tour_date" class="form-label">Select Tour Date</label>
-              <input type="date" class="form-control" id="tour_date" name="tour_date" required>
+              <input type="date" class="form-control" id="tour_date" name="tour_date">
             </div>
 
             <!-- Pickup Time -->
             <div class="col-md-5">
               <label for="pickup_time" class="form-label">Pickup Time</label>
-              <input type="time" class="form-control" id="pickup_time" name="pickup_time" required>
+              <input type="time" class="form-control" id="pickup_time" name="pickup_time">
             </div>
           </div>
         </div>
@@ -186,7 +186,7 @@
         <!-- Pickup Location -->
         <div class="mb-3">
           <label for="pickup_location" class="form-label">Pickup Location</label>
-          <input type="text" class="form-control" id="pickup_location" name="pickup_location" placeholder="Enter your hotel or location" required>
+          <input type="text" class="form-control" id="pickup_location" name="pickup_location" placeholder="Enter your hotel or location">
         </div>
 
          <!-- Notes -->
@@ -197,7 +197,7 @@
 
         <!-- Submit Button -->
         <div class="text-center mt-5">
-          <button type="submit" class="btn btn-orange btn-lg px-4">Submit Booking</button>
+          <button type="submit" class="btn btn-orange btn-lg px-4" id="btnSubmitBooking">Submit Booking</button>
         </div>
       </form>
     </div>
@@ -297,12 +297,34 @@
   </div>
 </footer>
 
+<!-- Booking Confirmation Modal -->
+<div class="modal fade" id="bookingConfirmationModal" tabindex="-1" aria-labelledby="bookingConfirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-body text-center p-5">
+        <div class="text-success mb-4">
+          <i class="bi bi-check-circle-fill display-4"></i>
+        </div>
+        <h4 class="mb-3 fw-semibold">Booking Successfully Submitted!</h4>
+        <p class="text-muted mb-4">
+          Thank you for booking with <span class="text-orange"><strong>MJ Bohol Tours</strong></span>!<br>
+          One of our friendly team members will reach out via email and phone to confirm your booking details.
+        </p>
+        <button type="button" class="btn btn-outline-success px-4" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection
 
 @section('view_scripts')
   <script>
+  
     $(document).ready(function () {
+      // load defaults
+      disablePastDatesOnInput();
+
       // Smooth scroll for links with hashes (e.g., #home, #about, etc.)
       $("a[href^='#']").on('click', function (e) {
         e.preventDefault(); // Prevent default anchor link behavior
@@ -311,19 +333,20 @@
         var target = this.hash;
         scrollNavigate(target);
       });
-
+      
+      const selectedValues = new Set();
+      let selectedDestArray = [];
       const $dropdown = $("#destinationDropdown");
       const $selectedList = $("#selectedDestinations");
 
-      const selectedValues = new Set();
-
       $dropdown.on("change", function () {
-        const value = $(this).val();
+        const selectedOption = $(this).find(":selected");
+        const value = selectedOption.val(); // ID
+        const name = selectedOption.data("name") || selectedOption.text(); // Display name fallback
 
-        if (value && !selectedValues.has(value)) {
-          selectedValues.add(value);
+        if (value && !selectedDestArray.includes(value)) {
+          selectedDestArray.push(value);
 
-          // Create hidden input for form submission
           const $hiddenInput = $("<input>", {
             type: "hidden",
             name: "destinations[]",
@@ -331,29 +354,159 @@
             "data-destination": value
           });
 
-          // Create visual pill element
-          const $pill = $(` 
+          const $pill = $(`
             <div class="badge bg-orange text-white d-flex align-items-center" style="padding: 0.6em 0.8em;">
-              ${value}
+              ${name}
               <button type="button" class="btn-close btn-close-white btn-sm ms-2" aria-label="Remove" data-destination="${value}"></button>
             </div>
           `);
 
-          // Remove logic
           $pill.find("button").on("click", function () {
             const dest = $(this).data("destination");
-            selectedValues.delete(dest);
-            $selectedList.find(`input[data-destination="${dest}"]`).remove();
-            $pill.remove();
+             // ✅ Update selected destination_ids
+            selectedDestArray = selectedDestArray.filter(item => item !== dest.toString());
+            console.log("selectedDestArray", selectedDestArray);
+            $selectedList.find(`input[data-destination="${dest}"]`).remove(); // ✅ Remove hidden input
+            $(this).parent().remove(); // ✅ Remove pill
           });
 
-          // Append to list
           $selectedList.append($hiddenInput).append($pill);
-
-          // Reset dropdown
           $dropdown.prop("selectedIndex", 0);
         }
       });
+
+      function resetBookingForm() {
+        $('#submitBookingForm')[0].reset();
+        selectedDestArray.length = 0;
+        $("#selectedDestinations").empty();
+      }
+
+      $("#submitBookingForm").submit(function(e) {
+        e.preventDefault();
+        loadingState($('#btnSubmitBooking'), true, 'Loading...');
+
+        const fullnameInput = $('#fullname');
+        const emailInput = $('#email');
+        const contactInput = $('#contact_number');
+        const destinationsInput = $('#destinationDropdown');
+        const guestsInput = $('#guests');
+        const tourDateInput = $("#tour_date");
+        const pickUpTimeInput = $("#pickup_time");
+        const pickUpLocation = $('#pickup_location');
+        const notesInput = $('#notes');
+
+        if (
+          !notEmpty(fullnameInput) || 
+          !notEmpty(emailInput) || 
+          !notEmpty(contactInput) || 
+          selectedDestArray.length === 0 || 
+          !notEmpty(guestsInput) || 
+          !notEmpty(tourDateInput) || 
+          !notEmpty(pickUpTimeInput) || 
+          !notEmpty(pickUpLocation)
+        ) {
+          if(selectedDestArray.length === 0) {
+            destinationsInput.addClass("is-invalid");
+            destinationsInput.focus();
+          } else {
+            destinationsInput.removeClass("is-invalid");
+
+            showNotyf("Please fill-in the required fields", "error");
+            loadingState($('#btnSubmitBooking'), false, 'Submit Booking');
+          }
+        } else {
+          const csrfToken = $('meta[name="csrf-token"]').attr('content');
+          const fullname = fullnameInput.val();
+          const email = emailInput.val();
+          const contact = contactInput.val();
+          const destinations = selectedDestArray;
+          const guests = guestsInput.val()
+
+          // Format tour date to mm/dd/yyyy
+          let tourDate = "";
+          // default format: yyyy-mm-dd
+          const dateValue = tourDateInput.val();
+          // change format: mm-dd-yyyy
+          if (dateValue) {
+            const [yyyy, mm, dd] = dateValue.split("-");
+            tourDate = `${mm}/${dd}/${yyyy}`;
+          }
+
+          // Format pickup time to hh:mm AM/PM
+          let pickupTime = "";
+          // deafualt: 24-hour format
+          const pickupTimeValue = pickUpTimeInput.val();
+
+          if (pickupTimeValue) {
+            const [hour, minute] = pickupTimeValue.split(":");
+            let hourNum = parseInt(hour);
+            const ampm = hourNum >= 12 ? 'PM' : 'AM';
+            hourNum = hourNum % 12 || 12;
+            pickupTime = `${hourNum}:${minute} ${ampm}`;
+          }
+
+          const pickupLocation =pickUpLocation.val();
+          const notes = notesInput.val();
+
+          const formData = {
+            _token: csrfToken,
+            fullname,
+            email,
+            contact,
+            destinations: destinations.join(','),
+            number_of_guests: guests,
+            tour_date: tourDate,
+            pickup_time: pickupTime,
+            pickup_location: pickupLocation,
+            notes
+          }
+
+          $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: formData,
+            success: function(response) {
+              const { status, message } = response;
+
+              if (status == 200) {
+                // Show the confirmation modal
+                const bookingModal = new bootstrap.Modal(document.getElementById('bookingConfirmationModal'));
+                bookingModal.show();
+
+                resetBookingForm();
+                // showNotyf(message);
+                loadingState($('#btnSubmitBooking'), false, 'Submit Booking');
+
+                // auto-hide after 10 seconds
+                setTimeout(() => bookingModal.hide(), 10000);
+              }
+            },
+            error: function(xhr) {
+              if (xhr.status == 419) {
+                  console.log("Unauthorized"); // no token error
+              } else if (xhr.status == 422) {
+                  showNotyf("Please fill-in the required fields", "error");
+                  console.log(
+                      `Missing Params - Resulted to "${xhr.statusText}" error.`
+                  );
+              } else if (xhr.status == 500) {
+                  console.log("Internal Server Error"); // unknow error
+              }
+              loadingState($('#btnSubmitBooking'), false, 'Submit Booking');
+            }
+          });
+        }
+      });
+
+      function disablePastDatesOnInput() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const dd = String(today.getDate()).padStart(2, '0');
+
+        const minDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById("tour_date").setAttribute("min", minDate);
+      }
     });
   </script>
 @endsection

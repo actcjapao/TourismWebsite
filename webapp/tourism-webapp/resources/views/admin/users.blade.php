@@ -156,6 +156,7 @@
             data: formData,
             success: function(response) {
                 const { status, message, account_id } = response
+                
                 if (status == 200) {
                     $('#save_account_form')[0].reset();
                     
@@ -185,6 +186,7 @@
                 } else if (xhr.status == 500) {
                     console.log("Internal Server Error"); // unknow error
                 }
+
                 loadingState($('#btnSaveAccount'), false, 'Save Account');
             }
         });

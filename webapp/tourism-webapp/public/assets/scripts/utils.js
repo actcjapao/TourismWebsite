@@ -1,3 +1,15 @@
+// validator function (start)
+function notEmpty(caller) {
+    if (caller.val() == "") {
+        caller.addClass("is-invalid");
+        caller.focus();
+        return false;
+    } else {
+        caller.removeClass("is-invalid");
+        return true;
+    }
+}
+
 function scrollNavigate(target) {
     var $target = $(target);
 
@@ -10,18 +22,26 @@ function scrollNavigate(target) {
     }
 }
 
-function showNotyf(message) {
+function showNotyf(message, type = "success") {
     // Create an instance of Notyf
-    var notyf = new Notyf();
-    
-    notyf.success({
-        message, 
-        duration: 5000, 
+    const notyf = new Notyf({
+        duration: 5000,
         position: {
             x: 'right',
             y: 'top',
         }
     });
+
+    // Show the message based on type
+    switch (type) {
+        case "error":
+            notyf.error(message);
+            break;
+        case "success":
+        default:
+            notyf.success(message);
+            break;
+    }
 }
 
 function loadingState(el, is_loading, text = "Loading") {

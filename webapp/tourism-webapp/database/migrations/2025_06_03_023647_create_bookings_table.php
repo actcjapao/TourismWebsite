@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('fullname');
             $table->string('email');
             $table->string('contact');
-            $table->json('destinations');
+            $table->text('destinations');
             $table->integer('number_of_guests');
             $table->string('tour_date');
             $table->string('pickup_time');
