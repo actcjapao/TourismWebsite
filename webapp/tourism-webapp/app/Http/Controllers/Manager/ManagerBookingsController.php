@@ -14,6 +14,10 @@ class ManagerBookingsController extends Controller
         $this->page = "manager_bookings";
     }
 
+    function getBookings() {
+        
+    }
+
     function load() {
         $page = $this->page;
         return view('manager/bookings', compact('page'));

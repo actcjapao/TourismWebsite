@@ -18,13 +18,13 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <div class="table-responsive mx-1 my-1 py-3 px-2">
-                        <table class="table table-hover" id="accountTable">
+                        <table class="table table-sm table-hover" id="accountTable">
                             <thead class="table-white">
                                 <tr>
-                                    <th>Account ID</th>
-                                    <th>Full Name</th>
-                                    <th>Username</th>
-                                    <th>User Type</th>
+                                    <th>Name</th>
+                                    <th>Destinations</th>
+                                    <th>Guests</th>
+                                    <th>Tour Date</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
