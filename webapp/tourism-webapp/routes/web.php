@@ -64,8 +64,11 @@ Route::middleware(['authentication'])->group(function () {
     Route::get('/manage/manager/bookings', [ManagerBookingsController::class, 'load'])->name('manager.bookings.load');
 });
 
+// API endpoints (need to have a auth middleware)
 Route::post('/login', [AuthenticationController::class, 'login'])->name('account.login');
 Route::post('/logout', [AuthenticationController::class, 'logout'])->name('account.logout');
 
 Route::post('/submit-booking', [LandingController::class, 'submitBooking'])->name('booking.submit');
+Route::get('/get-bookings', [ManagerBookingsController::class, 'getBookings'])->name('manager.get.bookings');
+
 Route::post('/save-user', [AdminUsersController::class, 'saveUser'])->name('user.save');

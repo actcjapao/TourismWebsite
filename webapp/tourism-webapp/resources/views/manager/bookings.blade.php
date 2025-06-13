@@ -12,13 +12,13 @@
         </div>
     </div>
 
-    <!-- Accounts Table -->
+    <!-- Bookings Table -->
     <div class="row">
         <div class="col-12">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <div class="table-responsive mx-1 my-1 py-3 px-2">
-                        <table class="table table-sm table-hover" id="accountTable">
+                        <table class="table table-sm table-hover" id="bookingsTable">
                             <thead class="table-white">
                                 <tr>
                                     <th>Name</th>
@@ -30,18 +30,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($accounts as $account)
-                                    <tr account-id="{{ $account->account_id }}">
-                                        <td>{{ $account->account_id }}</td>
-                                        <td>{{ $account->firstname }} {{ $account->lastname }}</td>
-                                        <td>{{ $account->username }}</td>
-                                        <td>{{ ucfirst($account->usertype) }}</td>
-                                        <td>{{ $account->status }}</td>
-                                        <td>
-                                            <i account-id="{{ $account->account_id }}" class="bi bi-pencil-fill" onclick="alert('Functionality not yet available')"></i>
-                                        </td>
-                                    </tr>
-                                @endforeach --}}
+                               <tr>
+                                <td>John Doe</td>
+                                <td>Sample destinations</td>
+                                <td>5</td>
+                                <td>June 20, 2025</td>
+                                <td>unverified</td>
+                                <td>Edit</td>
+                               </tr>
                             </tbody>
                         </table>
                     </div>
@@ -53,4 +49,22 @@
 @endsection
 
 @section('view_scripts')
+<script>
+    $(document).ready(function () {
+        $('#bookingsTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route("manager.get.bookings") }}',
+            pageLength: 10,
+            columns: [
+                { data: 'name' },
+                { data: 'destinations' },
+                { data: 'guests' },
+                { data: 'tour_date' },
+                { data: 'status' },
+                { data: 'actions', orderable: false, searchable: false }
+            ]
+        });
+    });
+</script>
 @endsection
