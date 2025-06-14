@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 use App\Models\Booking;
+use App\Models\Destinations;
+
+use App\Helpers\Main;
 
 class ManagerBookingsController extends Controller
 {
@@ -79,13 +82,16 @@ class ManagerBookingsController extends Controller
         $data = [];
 
         foreach ($bookings as $booking) {
+            $destinations = Main::getDestinationNames($booking->destinations);
+
             $data[] = [
                 'name' => $booking->fullname,
-                'destinations' => $booking->destinations,
+                'destinations' => $destinations,
                 'guests' => $booking->number_of_guests,
                 'tour_date' => \Carbon\Carbon::parse($booking->tour_date)->format('F j, Y'),
                 'status' => $booking->status,
-                'actions' => '<a href="#">Edit</a>',
+                'actions' => '<i account-id="'.$booking->booking_id.'" class="bi bi-search text-orange view-booking" style="cursor: pointer" data-id="'.$booking->booking_id.'"></i>&nbsp;'.
+                '<i account-id="'.$booking->booking_id.'" class="bi bi-pencil-fill text-orange" style="cursor: pointer" onclick="alert(\'Functionality not yet available\')"></i>',
             ];
         }
 

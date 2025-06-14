@@ -29,16 +29,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                               <tr>
-                                <td>John Doe</td>
-                                <td>Sample destinations</td>
-                                <td>5</td>
-                                <td>June 20, 2025</td>
-                                <td>unverified</td>
-                                <td>Edit</td>
-                               </tr>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
@@ -51,7 +42,9 @@
 @section('view_scripts')
 <script>
     $(document).ready(function () {
-        $('#bookingsTable').DataTable({
+        const bookingsTable = $('#bookingsTable');
+
+        bookingsTable.DataTable({
             processing: true,
             serverSide: true,
             ajax: '{{ route("manager.get.bookings") }}',
@@ -64,6 +57,20 @@
                 { data: 'status' },
                 { data: 'actions', orderable: false, searchable: false }
             ]
+        });
+
+        const bookingsDataTable = bookingsTable.DataTable();
+        // Open modal on view icon click
+        $(document).on('click', '.view-booking', function () {
+            let row = $(this).closest('tr');
+            let data = bookingsDataTable.row(row).data();
+
+            console.log("DATA", data);
+
+            // $('#editBookingId').val($(this).data('id'));
+            // $('#editFullname').val(data.name);
+            // $('#editStatus').val(data.status);
+            // $('#editBookingModal').modal('show');
         });
     });
 </script>
