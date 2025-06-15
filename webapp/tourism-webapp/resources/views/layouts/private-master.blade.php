@@ -18,6 +18,7 @@ $user = session('authenticated_user');
     <link href="{{ asset('assets/sidebar/sidebar.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/notyf/notyf.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/bsv5-datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/bsv5-datatable/css/custom.css') }}" rel="stylesheet">
     @yield('view_styles')
     <title>M J | @yield('view_title')</title>
 </head>

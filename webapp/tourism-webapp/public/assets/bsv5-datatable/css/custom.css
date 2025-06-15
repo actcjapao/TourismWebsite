@@ -1,0 +1,17 @@
+/* ----------------------------------------------------------
+   DataTables Custom Pagination Styling
+   Purpose: Override default Bootstrap 5 colors for pagination
+            in DataTables to match custom theme (e.g., orange)
+----------------------------------------------------------- */
+
+/* Style for the active pagination button (current page) */
+.dataTables_wrapper .dataTables_paginate .page-item.active .page-link {
+    background-color: var(--bs-orange) !important; /* Background color for active page button */
+    border-color: var(--bs-orange) !important;     /* Border color for active page button */
+    color: white !important;                     /* Text color for active page button */
+}
+
+/* Style for all pagination buttons (default state) */
+.dataTables_wrapper .dataTables_paginate .page-link {
+    color: var(--bs-orange) !important;             /* Text color for inactive pagination buttons */
+}

@@ -90,8 +90,20 @@ class ManagerBookingsController extends Controller
                 'guests' => $booking->number_of_guests,
                 'tour_date' => \Carbon\Carbon::parse($booking->tour_date)->format('F j, Y'),
                 'status' => $booking->status,
-                'actions' => '<i account-id="'.$booking->booking_id.'" class="bi bi-search text-orange view-booking" style="cursor: pointer" data-id="'.$booking->booking_id.'"></i>&nbsp;'.
-                '<i account-id="'.$booking->booking_id.'" class="bi bi-pencil-fill text-orange" style="cursor: pointer" onclick="alert(\'Functionality not yet available\')"></i>',
+                'actions' => '
+                    <i class="bi bi-eye-fill text-orange view-booking" data-booking=\''.json_encode([
+                        'fullname' => $booking->fullname,
+                        'email' => $booking->email,
+                        'contact' => $booking->contact,
+                        'destinations' => $destinations,
+                        'number_of_guests' => $booking->number_of_guests,
+                        'tour_date' => $booking->tour_date,
+                        'pickup_time' => $booking->pickup_time,
+                        'pickup_location' => $booking->pickup_location,
+                        'notes' => $booking->notes,
+                        'status' => $booking->status
+                    ], JSON_HEX_APOS).'\' style="cursor:pointer;" title="View"></i>
+                '
             ];
         }
 
