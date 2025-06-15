@@ -44,7 +44,7 @@
                                         <td>{{ ucfirst($account->usertype) }}</td>
                                         <td>{{ $account->status }}</td>
                                         <td>
-                                            <i account-id="{{ $account->account_id }}" class="bi bi-pencil-fill" onclick="alert('Functionality not yet available')"></i>
+                                            <i account-id="{{ $account->account_id }}" class="bi bi-pencil-fill text-orange" onclick="alert('Functionality not yet available')"></i>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -168,7 +168,7 @@
                         username: formData.username,
                         usertype: formData.usertype, 
                         status: 'active',
-                        actions: `<i account-id="${ account_id }" class="bi bi-pencil-fill" onclick="alert('Functionality not yet available')"></i>`
+                        actions: `<i account-id="${ account_id }" class="bi bi-pencil-fill text-orange" onclick="alert('Functionality not yet available')"></i>`
                     });
 
                     showNotyf(message);
